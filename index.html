@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cut">
-  <meta name="theme-color" content="#f2c12e">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1d1d1f">
   <title>NYC Life</title>
   <meta name="description" content="A free browser life sim set in New York City. Get a job, make rent, survive the subway.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f2c12e'/%3E%3Cpath d='M6 26V12h5v14M13 26V6h6v20M21 26V14h5v12' fill='%231d1d1f'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,24 +17,25 @@
   <section id="create" class="screen">
     <header class="title">
       <h1>NYC LIFE</h1>
-      <p>Make it in New York. Or at least make rent.</p>
+      <p id="c-tagline"></p>
     </header>
     <div class="c-row">
       <div id="c-avatar" class="c-avatar"></div>
       <div class="c-name">
-        <label for="c-name">Your name</label>
-        <input id="c-name" maxlength="18" placeholder="e.g. Sam" autocomplete="off">
-        <button id="c-random" class="btn small">Random look</button>
+        <label for="c-name" id="c-namelabel"></label>
+        <input id="c-name" maxlength="18" placeholder="Sam" autocomplete="off">
+        <button id="c-random" class="btn small"></button>
       </div>
     </div>
-    <div class="c-pick"><label>Skin</label><div id="c-skin" class="sws"></div></div>
-    <div class="c-pick"><label>Hair</label><div id="c-hair" class="sws words"></div></div>
-    <div class="c-pick"><label>Hair color</label><div id="c-haircolor" class="sws"></div></div>
-    <div class="c-pick"><label>Shirt</label><div id="c-shirt" class="sws"></div></div>
-    <h2 class="c-h">Your backstory</h2>
+    <h2 class="c-h" id="c-backstory"></h2>
     <div id="c-bg" class="c-bg"></div>
-    <button id="c-reroll" class="btn">Reroll backstory</button>
-    <button id="c-start" class="btn primary big">Move to New York</button>
+    <button id="c-reroll" class="btn"></button>
+    <button id="c-start" class="btn primary big"></button>
+    <div class="c-pick"><label data-look-label="extra"></label><div id="c-extra" class="sws"></div></div>
+    <div class="c-pick"><label data-look-label="hair"></label><div id="c-hair" class="sws"></div></div>
+    <div class="c-pick"><label data-look-label="hairColor"></label><div id="c-haircolor" class="sws"></div></div>
+    <div class="c-pick"><label data-look-label="skin"></label><div id="c-skin" class="sws"></div></div>
+    <div class="c-pick"><label data-look-label="shirt"></label><div id="c-shirt" class="sws"></div></div>
   </section>
 
   <!-- game -->
@@ -39,6 +43,7 @@
     <header id="hud" class="hud"></header>
     <div class="mapwrap">
       <div id="area-name" class="area-name"></div>
+      <button id="goal" class="goal hidden"></button>
       <svg id="map" class="map" xmlns="http://www.w3.org/2000/svg"></svg>
       <div id="ticker" class="ticker"></div>
     </div>
@@ -47,7 +52,7 @@
       <div id="phone-body"></div>
     </div>
     <div id="chat" class="panel hidden">
-      <p class="note">Block chat. For now the people here are neighborhood regulars (computer characters). Real players will show up here once multiplayer is on.</p>
+      <p class="note" id="chat-note"></p>
       <ul id="chat-log" class="chat-log"></ul>
       <form id="chat-form" class="chat-form"><input id="chat-input" maxlength="140" placeholder="Say something to the block" autocomplete="off"><button class="btn primary">Send</button></form>
     </div>
@@ -64,6 +69,8 @@
   <div id="toast" class="toast" role="status"></div>
 
   <script src="js/data.js"></script>
+  <script src="js/metrics.js"></script>
+  <script src="js/audio.js"></script>
   <script src="js/engine.js"></script>
   <script src="js/avatar.js"></script>
   <script src="js/net.js"></script>

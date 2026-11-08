@@ -24,7 +24,7 @@
   }
 
   function sign(x, y, w, text, fill, color) {
-    const fs = Math.min(11, (w - 6) / (text.length * 0.62));
+    const fs = Math.min(10, (w - 14) / (text.length * 0.8));
     return `<rect x="${x + 4}" y="${y}" width="${w - 8}" height="16" rx="2" fill="${fill || '#1d1d1f'}"/>` +
       `<text x="${x + w / 2}" y="${y + 11.5}" font-size="${fs}" text-anchor="middle" class="signtxt" fill="${color || '#fff'}">${esc(text)}</text>`;
   }
@@ -93,11 +93,18 @@
       b.forEach((bb, i) => {
         const bw = (p.w - 16) / b.length, bx = p.x + 6 + i * (bw + 2), by = p.y + 8;
         s += `<g class="billboard"><rect x="${bx}" y="${by}" width="${bw}" height="44" fill="${bb.color}" stroke="#111" stroke-width="2"/>` +
-          `<text x="${bx + bw / 2}" y="${by + 20}" font-size="${Math.min(9, bw / (bb.text.length * 0.62))}" text-anchor="middle" class="signtxt" fill="#fff">${esc(bb.text)}</text>` +
+          `<text x="${bx + bw / 2}" y="${by + 20}" font-size="${Math.min(9, (bw - 6) / (bb.text.length * 0.8))}" text-anchor="middle" class="signtxt" fill="#fff">${esc(bb.text)}</text>` +
           `<text x="${bx + bw / 2}" y="${by + 33}" font-size="${Math.min(6.5, bw / (bb.sub.length * 0.5))}" text-anchor="middle" fill="#fff" opacity=".85">${esc(bb.sub)}</text></g>`;
       });
       s += `<rect x="${p.x + 20}" y="${p.y + 64}" width="44" height="10" fill="#d23" opacity=".85"/><rect x="${p.x + 120}" y="${p.y + 70}" width="44" height="10" fill="#d23" opacity=".85"/>`;
       return s;
+    },
+    hydrant(p) {
+      const x = p.x, y = p.y;
+      return `<rect x="${x + 4}" y="${y + 8}" width="18" height="24" rx="4" fill="#c8372d" stroke="#222" stroke-width="2"/>` +
+        `<rect x="${x}" y="${y + 14}" width="26" height="7" rx="3" fill="#c8372d" stroke="#222" stroke-width="2"/>` +
+        `<path d="M${x + 5} ${y + 9} Q${x + 13} ${y - 2} ${x + 21} ${y + 9}Z" fill="#a82a22" stroke="#222" stroke-width="2"/>` +
+        `<rect x="${x + 2}" y="${y + 31}" width="22" height="4" fill="#222"/>`;
     },
     pier(p) {
       let s = `<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" fill="#a07a52" stroke="#5e4430" stroke-width="2"/>`;
@@ -134,7 +141,23 @@
       (label ? `<text y="18" font-size="7.5" text-anchor="middle" class="tag">${esc(label)}</text>` : '') + `</g>`;
   }
 
+  // where a figure stands next to a place
+  function spot(p, i) {
+    if (p.kind === 'subway') return [p.x + p.w + 30, p.y + p.h - 4];
+    if (p.kind === 'hydrant') return [p.x - 16 - i * 20, p.y + 30];
+    return [p.x + p.w / 2 + (i ? (i % 2 ? -22 : 22) * Math.ceil(i / 2) : 0), p.y + p.h + 28];
+  }
+
+  function pigeons(areaId) {
+    const spots = { home: [[58, 291], [74, 289], [300, 291]], midtown: [[150, 292], [166, 296]], downtown: [[200, 456], [214, 452], [60, 210]] }[areaId] || [];
+    return `<g class="pigeons" data-pigeon="1">` + spots.map(([x, y], i) =>
+      `<g transform="translate(${x},${y})"><g class="pigeon" style="animation-delay:${i * 0.7}s"><rect x="-10" y="-12" width="22" height="18" fill="transparent"/><ellipse rx="6" ry="4" fill="#8a8f9a" stroke="#333"/><circle cx="5" cy="-4" r="3" fill="#6f7480" stroke="#333"/><path d="M8 -4 l3 1 -3 1z" fill="#e0a52e"/><circle cx="6" cy="-4.5" r=".8" fill="#111"/></g></g>`).join('') +
+      `</g>`;
+  }
+
   NYC.Map = {
+    // Draws the area. The player figure is kept outside the redrawn layer so it
+    // can walk (CSS transition) between places instead of teleporting.
     render(svg, areaId, opts) {
       const area = Object.assign({ id: areaId }, D.areas[areaId]);
       const night = opts.night;
@@ -143,22 +166,43 @@
         const p = D.places[pid];
         const body = draw[p.kind](p, night);
         const lx = p.x + p.w / 2, ly = p.kind === 'subway' ? p.y + p.h + 32 : p.y + p.h + 12;
-        s += `<g class="place${opts.here === pid ? ' here' : ''}" data-place="${pid}" tabindex="0" role="button" aria-label="${esc(p.name)}">` +
-          `<rect class="hit" x="${p.x - 6}" y="${p.y - 6}" width="${p.w + 12}" height="${p.h + 12}" fill="transparent"/>` + body +
-          (p.kind !== 'subway' ? `<g class="plabel"><rect x="${lx - p.name.length * 3 - 6}" y="${ly - 9}" width="${p.name.length * 6 + 12}" height="13" rx="6.5"/><text x="${lx}" y="${ly}" font-size="8.5" text-anchor="middle">${esc(p.name)}</text></g>` : '') +
+        const goal = opts.goal === pid;
+        s += `<g class="place${opts.here === pid ? ' here' : ''}${goal ? ' goal' : ''}" data-place="${pid}" tabindex="0" role="button" aria-label="${esc(p.name)}">` +
+          `<rect class="hit" x="${p.x - 6}" y="${p.y - 6}" width="${p.w + 12}" height="${p.h + 12}" fill="transparent"/>` +
+          (goal ? `<rect class="goalring" x="${p.x - 5}" y="${p.y - 5}" width="${p.w + 10}" height="${p.h + 10}" rx="8"/>` : '') + body +
+          (p.kind !== 'subway' && p.kind !== 'hydrant' ? `<g class="plabel"><rect x="${lx - p.name.length * 3 - 6}" y="${ly - 9}" width="${p.name.length * 6 + 12}" height="13" rx="6.5"/><text x="${lx}" y="${ly}" font-size="8.5" text-anchor="middle">${esc(p.name)}</text></g>` : '') +
           `</g>`;
       });
-      // people
-      (opts.others || []).forEach((o, i) => {
+      s += pigeons(areaId);
+      const used = {};
+      (opts.others || []).forEach(o => {
         const p = D.places[o.place];
-        s += person(p.x + 18 + (i % 3) * 22, p.y + p.h + 26, o.color, o.name.split(' ')[0], false);
+        used[o.place] = (used[o.place] || 0) + 1;
+        const [x, y] = spot(p, used[o.place]);
+        s += person(x, y, o.color, o.name.split(' ')[0], false);
       });
+      if (night) s += `<rect x="0" y="0" width="${W}" height="${H}" fill="#0b1a40" opacity=".35" pointer-events="none"/>`;
+
       const hp = D.places[opts.here] || D.places[area.subway];
-      if (hp.kind === 'subway') s += person(hp.x + hp.w + 30, hp.y + hp.h - 4, opts.myColor, 'You', true);
-      else s += person(hp.x + hp.w / 2, hp.y + hp.h + 28, opts.myColor, 'You', true);
-      if (night) s += `<rect x="0" y="0" width="${W}" height="${H}" fill="#0b1a40" opacity=".38" pointer-events="none"/>`;
+      const [mx, my] = spot(hp, 0);
+      const sameArea = svg.dataset.area === areaId;
       svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-      svg.innerHTML = `<defs><clipPath id="mapclip"><rect width="${W}" height="${H}"/></clipPath></defs><g clip-path="url(#mapclip)">${s}</g>`;
+      if (!svg.querySelector('#layer')) {
+        svg.innerHTML = `<defs><clipPath id="mapclip"><rect width="${W}" height="${H}"/></clipPath></defs><g clip-path="url(#mapclip)"><g id="layer"></g><g id="me" class="walker">${person(0, 0, opts.myColor, 'You', true)}</g></g>`;
+      }
+      svg.querySelector('#layer').innerHTML = s;
+      const me = svg.querySelector('#me');
+      me.innerHTML = person(0, 0, opts.myColor, 'You', true);
+      me.classList.toggle('nowalk', !sameArea);
+      me.style.transform = `translate(${mx}px, ${my}px)`;
+      svg.dataset.area = areaId;
+    },
+    // screen position (client px) of a place, for number pops
+    where(svg, placeId) {
+      const g = svg.querySelector(`[data-place="${placeId}"]`);
+      if (!g) return null;
+      const r = g.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + Math.min(r.height / 2, 60) };
     }
   };
 })();

@@ -31,10 +31,11 @@
         clearInterval(timer);
         timer = setInterval(() => {
           if (Math.random() < 0.5) return;
-          const here = others();
+          const here = others().filter(o => D.chatter[o.name]);
           if (!here.length) return;
           const who = here[Math.floor(Math.random() * here.length)];
-          const text = D.chatter[Math.floor(Math.random() * D.chatter.length)];
+          const lines = D.chatter[who.name];
+          const text = lines[Math.floor(Math.random() * lines.length)];
           chatCbs.forEach(cb => cb({ name: who.name, text, area, mine: false }));
         }, 9000);
       },

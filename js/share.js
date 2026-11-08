@@ -1,14 +1,16 @@
-// "My week in NYC" card: a 1080x1350 image (Instagram portrait size) drawn on canvas,
-// shared through the phone's share sheet when available, otherwise downloaded.
+// "My NYC life" card: a 1080x1350 image (portrait, fits Instagram and phone screens)
+// drawn on canvas, shared through the phone's share sheet or downloaded on desktop.
 (function () {
   const E = () => NYC.Engine;
+  const SIGN = 'Bungee, "Arial Black", sans-serif';
+  const BODY = 'Rubik, "Trebuchet MS", sans-serif';
 
-  function wrap(ctx, text, x, y, maxW, lh) {
+  function wrap(ctx, text, x, y, maxW, lh, maxLines) {
     const words = text.split(' ');
-    let line = '';
+    let line = '', n = 0;
     for (const w of words) {
       const t = line ? line + ' ' + w : w;
-      if (ctx.measureText(t).width > maxW && line) { ctx.fillText(line, x, y); y += lh; line = w; } else line = t;
+      if (ctx.measureText(t).width > maxW && line) { ctx.fillText(line, x, y); y += lh; line = w; if (++n >= (maxLines || 9) - 1) break; } else line = t;
     }
     if (line) ctx.fillText(line, x, y);
     return y + lh;
@@ -17,12 +19,16 @@
   function skyline(ctx, W, base, color) {
     ctx.fillStyle = color;
     const bs = [[0, 160], [70, 240], [130, 180], [190, 330], [240, 210], [300, 280], [370, 150], [430, 420], [470, 380], [520, 200], [590, 260], [650, 190], [700, 310], [770, 230], [830, 170], [880, 290], [950, 210], [1010, 250]];
-    bs.forEach(([x, h], i) => {
-      const w = (bs[i + 1] ? bs[i + 1][0] : W) - x + 2;
-      ctx.fillRect(x, base - h, w, h);
-    });
-    // a spire
+    bs.forEach(([x, h], i) => { const w = (bs[i + 1] ? bs[i + 1][0] : W) - x + 2; ctx.fillRect(x, base - h, w, h); });
     ctx.fillRect(448, base - 520, 6, 100);
+    // water tower
+    ctx.fillRect(220, base - 380, 46, 44); ctx.beginPath(); ctx.moveTo(214, base - 380); ctx.lineTo(243, base - 410); ctx.lineTo(272, base - 380); ctx.fill();
+  }
+
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
   }
 
   NYC.Share = {
@@ -31,59 +37,63 @@
       const W = 1080, H = 1350;
       canvas.width = W; canvas.height = H;
       const ctx = canvas.getContext('2d');
-      const font = (wt, px) => `${wt} ${px}px "Trebuchet MS", "Segoe UI", system-ui, sans-serif`;
+      const ink = '#1d1d1f';
 
-      // sky
-      const g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, '#ffb35c'); g.addColorStop(0.55, '#f26b5b'); g.addColorStop(1, '#3a2a6b');
-      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = 'rgba(255,240,200,.85)'; ctx.beginPath(); ctx.arc(820, 300, 110, 0, 7); ctx.fill();
-      skyline(ctx, W, 640, 'rgba(40,24,70,.55)');
+      // flat sky bands (no gradients: keeps the hand-made look)
+      [['#ffb35c', 0], ['#f8925a', 210], ['#f26b5b', 420]].forEach(([c, y]) => { ctx.fillStyle = c; ctx.fillRect(0, y, W, 420); });
+      ctx.fillStyle = '#fff1c9'; ctx.beginPath(); ctx.arc(830, 300, 105, 0, 7); ctx.fill();
+      skyline(ctx, W, 640, '#3a2a6b');
+      ctx.fillStyle = '#3a2a6b'; ctx.fillRect(0, 640, W, H - 640);
 
       // header
-      ctx.fillStyle = '#1d1d1f';
-      ctx.font = font(900, 50); ctx.fillText('NYC LIFE', 70, 110);
-      ctx.font = font(900, 112); ctx.fillText('WEEK ' + w.weekNo, 70, 230);
-      ctx.font = font(700, 44); ctx.fillText('in New York', 74, 290);
+      ctx.fillStyle = ink;
+      ctx.font = `44px ${SIGN}`; ctx.fillText('NYC LIFE', 70, 110);
+      ctx.font = `120px ${SIGN}`; ctx.fillText('WEEK ' + w.weekNo, 66, 240);
 
-      // avatar card
-      ctx.fillStyle = '#fff8ec'; roundRect(ctx, 60, 380, 960, 900, 36); ctx.fill();
-      ctx.fillStyle = '#f2c12e'; roundRect(ctx, 60, 380, 960, 150, 36); ctx.fill(); ctx.fillRect(60, 480, 960, 50);
-      NYC.Avatar.canvas(ctx, S.char.look, 80, 350, 1.55);
-      ctx.fillStyle = '#1d1d1f'; ctx.font = font(900, 54); ctx.fillText(S.char.name, 260, 448);
-      ctx.font = font(600, 32); ctx.fillText(w.job + ' · ' + w.hood, 262, 500);
+      // card
+      ctx.fillStyle = ink; rr(ctx, 72, 352, 960, 920, 30); ctx.fill();
+      ctx.fillStyle = '#fff8ec'; rr(ctx, 60, 340, 960, 920, 30); ctx.fill();
+      ctx.lineWidth = 6; ctx.strokeStyle = ink; ctx.stroke();
+      ctx.fillStyle = '#f2c12e'; ctx.beginPath(); ctx.arc(170, 450, 82, 0, 7); ctx.fill(); ctx.stroke();
+      ctx.save(); ctx.beginPath(); ctx.arc(170, 450, 79, 0, 7); ctx.clip();
+      NYC.Avatar.canvas(ctx, S.char.look, 92, 372, 1.55);
+      ctx.restore();
+      ctx.fillStyle = ink; ctx.font = `52px ${SIGN}`; ctx.fillText(S.char.name.toUpperCase(), 280, 430);
+      ctx.font = `600 30px ${BODY}`; ctx.fillText(w.job + ' in ' + w.hood, 282, 478);
+      ctx.fillStyle = '#b23a48'; ctx.font = `30px ${SIGN}`; ctx.fillText(w.rank.toUpperCase(), 282, 522);
+
+      // the hook line
+      if (w.hook) {
+        ctx.fillStyle = '#f2c12e'; ctx.fillRect(100, 570, 880, 96);
+        ctx.fillStyle = ink; ctx.font = `600 33px ${BODY}`;
+        wrap(ctx, w.hook, 120, 610, 840, 42, 2);
+      }
 
       // stats
       const stats = [
-        ['Made', E().money(w.earned)],
-        ['Rent', w.paid >= w.due ? E().money(w.paid) + ' paid' : 'short ' + E().money(w.due - w.paid)],
-        ['Dollar slices', w.slices || 0],
-        ['Train delays', w.delays || 0],
-        ['Bodega cats pet', w.cats || 0],
-        ['Rats seen', w.rats || 0]
+        ['MADE', E().money(w.earned)],
+        ['RENT', w.paid >= w.due ? E().money(w.paid) : 'SHORT'],
+        ['DOLLAR SLICES', w.slices || 0],
+        ['TRAIN DELAYS', w.delays || 0],
+        ['RATS SEEN', w.rats || 0],
+        ['STICKERS', w.stickers]
       ];
       stats.forEach(([k, v], i) => {
-        const x = 100 + (i % 2) * 460, y = 600 + Math.floor(i / 2) * 120;
-        ctx.fillStyle = '#7a6a5a'; ctx.font = font(600, 30); ctx.fillText(k.toUpperCase(), x, y);
-        ctx.fillStyle = '#1d1d1f'; ctx.font = font(900, 54); ctx.fillText(String(v), x, y + 58);
+        const x = 110 + (i % 3) * 300, y = 740 + Math.floor(i / 3) * 140;
+        ctx.fillStyle = '#7a6a5a'; ctx.font = `800 24px ${BODY}`; ctx.fillText(k, x, y);
+        ctx.fillStyle = ink; ctx.font = `56px ${SIGN}`; ctx.fillText(String(v), x, y + 64);
       });
-
-      // sanity meter
-      const sy = 980;
-      ctx.fillStyle = '#7a6a5a'; ctx.font = font(600, 30); ctx.fillText('SANITY', 100, sy);
-      ctx.fillStyle = '#e5dccd'; roundRect(ctx, 250, sy - 28, 680, 34, 17); ctx.fill();
-      ctx.fillStyle = w.sanity > 50 ? '#2f8a4f' : w.sanity > 25 ? '#e0a52e' : '#b23a48';
-      roundRect(ctx, 250, sy - 28, Math.max(34, 680 * w.sanity / 100), 34, 17); ctx.fill();
 
       // highlight
       const m = w.moments && w.moments.length ? w.moments[w.moments.length - 1] : 'survived another week';
-      ctx.fillStyle = '#1d1d1f'; ctx.font = font(800, 36);
-      ctx.fillText('Highlight:', 100, 1070);
-      ctx.font = font(600, 38);
-      wrap(ctx, 'I ' + m + '.', 100, 1122, 880, 48);
+      ctx.strokeStyle = ink; ctx.lineWidth = 3; ctx.setLineDash([12, 10]);
+      ctx.beginPath(); ctx.moveTo(100, 1030); ctx.lineTo(980, 1030); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#b23a48'; ctx.font = `28px ${SIGN}`; ctx.fillText('THIS WEEK I', 110, 1086);
+      ctx.fillStyle = ink; ctx.font = `600 40px ${BODY}`;
+      wrap(ctx, m + '.', 110, 1140, 860, 50, 2);
 
-      ctx.fillStyle = '#fff'; ctx.font = font(700, 30);
-      ctx.fillText('Play free: NYC Life (browser game)', 70, 1325);
+      ctx.fillStyle = '#fff8ec'; ctx.font = `600 30px ${BODY}`;
+      ctx.fillText(NYC.DATA.text.shareFooter, 72, 1318);
     },
 
     async share(canvas, text) {
@@ -101,10 +111,4 @@
       } catch (e) { return 'cancelled'; }
     }
   };
-
-  function roundRect(ctx, x, y, w, h, r) {
-    ctx.beginPath(); ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
-  }
 })();
