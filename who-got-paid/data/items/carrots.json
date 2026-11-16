@@ -1,0 +1,77 @@
+{
+ "item": "carrots",
+ "name": "carrots",
+ "everyday": false,
+ "generated": "2026-11-16",
+ "unit": "per pound",
+ "data_year": "2025",
+ "retail_price": {
+  "dollars": 1.12,
+  "cents_per_lb": 111.7,
+  "year": "2025",
+  "source": "USDA ERS Price Spreads from Farm to Consumer (retail data: Circana)",
+  "url": "https://www.ers.usda.gov/media/5752/fresh-carrots.csv",
+  "pulled": "2026-11-16"
+ },
+ "ers": {
+  "retail_cents_per_lb": 111.74,
+  "farm_price_cents_per_lb": 91.96,
+  "farm_share_pct": 84.84,
+  "farm_value_cents_per_retail_lb": 94.8,
+  "waste_factor_farm_lb_per_retail_lb": 1.031
+ },
+ "farm_price_check": {
+  "ers_farm_price_cents_per_lb": 92.0,
+  "ams_shipping_point_cents_per_lb": 37.5,
+  "ratio": 0.41,
+  "basis": "above_fob",
+  "meaning": "ERS farm price is above the packed shipping-point price for this pack: pack mix differs; treat with care."
+ },
+ "wholesale": {
+  "terminal_cents_per_lb": 48.0,
+  "cents_per_retail_lb": 49.5,
+  "pack": "25 and 50 lb sacks loose",
+  "carton_weight_source": null,
+  "market_days": 1835,
+  "markets": "Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia",
+  "months": "2025-01 to 2025-12"
+ },
+ "layers_cents": {
+  "farmworker": 28.28,
+  "farm_owner_and_costs": 56.56,
+  "shipping_and_wholesale": -40.51,
+  "store": 55.67
+ },
+ "layer_sources": {
+  "farmworker": "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute). Applied to the ERS farm value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5752/fresh-carrots.csv)",
+  "farm_owner_and_costs": "ERS farm value minus the farmworker estimate. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5752/fresh-carrots.csv)",
+  "shipping_and_wholesale": "AMS terminal-market price (25 and 50 lb sacks loose; Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia) adjusted by the ERS waste factor, minus ERS farm value. USDA AMS Market News (via market-tracker), https://github.com/codywtripp-lgtm/market-tracker",
+  "store": "ERS retail price minus the wholesale value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5752/fresh-carrots.csv)"
+ },
+ "trend_2yr": {
+  "from_year": "2023",
+  "to_year": "2025",
+  "retail_cents_per_lb": [
+   109.0,
+   111.7
+  ],
+  "retail_change_pct": 2.5,
+  "farm_price_cents_per_lb": [
+   71.4,
+   92.0
+  ],
+  "farm_price_change_pct": 28.8,
+  "gap_points": -26.3,
+  "retail_up_farm_down": false,
+  "source": "USDA ERS Price Spreads from Farm to Consumer (nominal dollars)",
+  "ams_shipping_point_change_pct": -4.3
+ },
+ "status": "flagged",
+ "flags": [
+  "negative layer: shipping_and_wholesale"
+ ],
+ "notes": [
+  "ERS carrot farm share jumped from 47.6% (2022) to 84.8% (2025), and the ERS farm price (92 c/lb) is more than double the AMS shipping-point price for loose carrots (37.5 c/lb). The ERS series likely values a different product mix (cut and baby carrots).",
+  "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute)."
+ ]
+}

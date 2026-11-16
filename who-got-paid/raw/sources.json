@@ -1,0 +1,108 @@
+{
+ "ers/fresh-tomatoes.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5760/fresh-tomatoes.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-lettuce-iceberg.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5754/fresh-lettuce-iceberg.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-lettuce-romaine.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5756/fresh-lettuce-romaine.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-potatoes.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5758/fresh-potatoes.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-strawberries.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5746/fresh-strawberries.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-apples.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5736/fresh-apples.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-grapes.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5740/fresh-grapes.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-oranges.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5742/fresh-oranges.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-broccoli.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5750/fresh-broccoli.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-carrots.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5752/fresh-carrots.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-peaches.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5744/fresh-peaches.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "ers/fresh-grapefruit.csv": {
+  "source": "USDA ERS, Price Spreads from Farm to Consumer",
+  "url": "https://www.ers.usda.gov/media/5738/fresh-grapefruit.csv",
+  "page": "https://www.ers.usda.gov/data-products/price-spreads-from-farm-to-consumer",
+  "license": "CC0",
+  "pulled": "2026-11-16"
+ },
+ "bls.json": {
+  "source": "U.S. Bureau of Labor Statistics, Average Price Data (U.S. city average)",
+  "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/",
+  "page": "https://www.bls.gov/cpi/factsheets/average-prices.htm",
+  "series": [
+   "APU0000711211",
+   "APU0000711311",
+   "APU0000711411",
+   "APU0000711415",
+   "APU0000712112",
+   "APU0000712211",
+   "APU0000712311"
+  ],
+  "pulled": "2026-11-16"
+ },
+ "ams_annual.csv": {
+  "source": "USDA AMS Market News terminal-market and shipping-point reports",
+  "url": "https://github.com/codywtripp-lgtm/market-tracker",
+  "note": "annual averages computed from market-tracker data/raw",
+  "market_tracker_commit": "9fab2b0493f48a0c018608576fb32a23bc67b665",
+  "pulled": "2026-11-16"
+ }
+}

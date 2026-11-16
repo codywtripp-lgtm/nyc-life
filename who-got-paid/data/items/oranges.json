@@ -1,0 +1,89 @@
+{
+ "item": "oranges",
+ "name": "oranges",
+ "everyday": false,
+ "generated": "2026-11-16",
+ "unit": "per pound",
+ "data_year": "2024/25",
+ "retail_price": {
+  "dollars": 1.41,
+  "cents_per_lb": 140.6,
+  "year": "2024/25",
+  "source": "USDA ERS Price Spreads from Farm to Consumer (retail data: Circana)",
+  "url": "https://www.ers.usda.gov/media/5742/fresh-oranges.csv",
+  "pulled": "2026-11-16"
+ },
+ "ers": {
+  "retail_cents_per_lb": 140.59,
+  "farm_price_cents_per_lb": 24.06,
+  "farm_share_pct": 17.64,
+  "farm_value_cents_per_retail_lb": 24.81,
+  "waste_factor_farm_lb_per_retail_lb": 1.031
+ },
+ "farm_price_check": {
+  "ers_farm_price_cents_per_lb": 24.1,
+  "ams_shipping_point_cents_per_lb": 66.6,
+  "ratio": 2.77,
+  "basis": "before_packing",
+  "meaning": "ERS farm price is below the packed shipping-point price: packing and cooling fall in the wholesale layer, not the farm layer."
+ },
+ "wholesale": {
+  "terminal_cents_per_lb": 83.7,
+  "cents_per_retail_lb": 86.3,
+  "pack": "navel oranges, 7/10 bushel cartons (38 lb)",
+  "carton_weight_source": "USDA Agricultural Handbook 697, Weights, Measures, and Conversion Factors for Agricultural Commodities and Their Products (1992), Table 6: California and Arizona orange carton, 38 lb",
+  "market_days": 1470,
+  "markets": "Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia",
+  "months": "2024-11 to 2025-10"
+ },
+ "layers_cents": {
+  "farmworker": 5.88,
+  "farm_owner_and_costs": 11.76,
+  "shipping_and_wholesale": 43.74,
+  "store": 38.62
+ },
+ "layers_cents_display": {
+  "farmworker": 6,
+  "farm_owner_and_costs": 12,
+  "shipping_and_wholesale": 44,
+  "store": 38
+ },
+ "layer_sources": {
+  "farmworker": "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute). Applied to the ERS farm value. USDA ERS Price Spreads from Farm to Consumer, 2024/25 (https://www.ers.usda.gov/media/5742/fresh-oranges.csv)",
+  "farm_owner_and_costs": "ERS farm value minus the farmworker estimate. USDA ERS Price Spreads from Farm to Consumer, 2024/25 (https://www.ers.usda.gov/media/5742/fresh-oranges.csv)",
+  "shipping_and_wholesale": "AMS terminal-market price (navel oranges, 7/10 bushel cartons (38 lb); Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia) adjusted by the ERS waste factor, minus ERS farm value. USDA AMS Market News (via market-tracker), https://github.com/codywtripp-lgtm/market-tracker",
+  "store": "ERS retail price minus the wholesale value. USDA ERS Price Spreads from Farm to Consumer, 2024/25 (https://www.ers.usda.gov/media/5742/fresh-oranges.csv)"
+ },
+ "trend_2yr": {
+  "from_year": "2022/23",
+  "to_year": "2024/25",
+  "retail_cents_per_lb": [
+   141.8,
+   140.6
+  ],
+  "retail_change_pct": -0.9,
+  "farm_price_cents_per_lb": [
+   24.6,
+   24.1
+  ],
+  "farm_price_change_pct": -2.3,
+  "gap_points": 1.4,
+  "retail_up_farm_down": false,
+  "source": "USDA ERS Price Spreads from Farm to Consumer (nominal dollars)",
+  "ams_shipping_point_change_pct": 12.9
+ },
+ "current_shelf_price": {
+  "series": "APU0000711311",
+  "label": "Oranges, Navel, per lb",
+  "latest_month": "2026-09",
+  "dollars_per_lb": 1.72,
+  "source": "BLS Average Price Data, U.S. city average",
+  "url": "https://www.bls.gov/cpi/factsheets/average-prices.htm"
+ },
+ "status": "ok",
+ "flags": [],
+ "notes": [
+  "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute).",
+  "ERS reports this item by season (2024/25); AMS prices averaged over November to October."
+ ]
+}

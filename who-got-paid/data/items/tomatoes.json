@@ -1,0 +1,90 @@
+{
+ "item": "tomatoes",
+ "name": "tomatoes",
+ "everyday": true,
+ "generated": "2026-11-16",
+ "unit": "per pound",
+ "data_year": "2025",
+ "retail_price": {
+  "dollars": 2.29,
+  "cents_per_lb": 228.8,
+  "year": "2025",
+  "source": "USDA ERS Price Spreads from Farm to Consumer (retail data: Circana)",
+  "url": "https://www.ers.usda.gov/media/5760/fresh-tomatoes.csv",
+  "pulled": "2026-11-16"
+ },
+ "ers": {
+  "retail_cents_per_lb": 228.81,
+  "farm_price_cents_per_lb": 54.27,
+  "farm_share_pct": 27.9,
+  "farm_value_cents_per_retail_lb": 63.85,
+  "waste_factor_farm_lb_per_retail_lb": 1.176
+ },
+ "farm_price_check": {
+  "ers_farm_price_cents_per_lb": 54.3,
+  "ams_shipping_point_cents_per_lb": 51.8,
+  "ratio": 0.96,
+  "basis": "packed",
+  "meaning": "ERS farm price matches the packed shipping-point price: the farm layer includes packing (grower-shipper)."
+ },
+ "wholesale": {
+  "terminal_cents_per_lb": 73.5,
+  "cents_per_retail_lb": 86.5,
+  "pack": "mature green field tomatoes, 25 lb cartons",
+  "carton_weight_source": null,
+  "market_days": 1757,
+  "markets": "Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia",
+  "months": "2025-01 to 2025-12"
+ },
+ "layers_cents": {
+  "farmworker": 9.3,
+  "farm_owner_and_costs": 18.6,
+  "shipping_and_wholesale": 9.9,
+  "store": 62.2
+ },
+ "layers_cents_display": {
+  "farmworker": 9,
+  "farm_owner_and_costs": 19,
+  "shipping_and_wholesale": 10,
+  "store": 62
+ },
+ "layer_sources": {
+  "farmworker": "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute). Applied to the ERS farm value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5760/fresh-tomatoes.csv)",
+  "farm_owner_and_costs": "ERS farm value minus the farmworker estimate. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5760/fresh-tomatoes.csv)",
+  "shipping_and_wholesale": "AMS terminal-market price (mature green field tomatoes, 25 lb cartons; Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia) adjusted by the ERS waste factor, minus ERS farm value. USDA AMS Market News (via market-tracker), https://github.com/codywtripp-lgtm/market-tracker",
+  "store": "ERS retail price minus the wholesale value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5760/fresh-tomatoes.csv)"
+ },
+ "trend_2yr": {
+  "from_year": "2023",
+  "to_year": "2025",
+  "retail_cents_per_lb": [
+   236.8,
+   228.8
+  ],
+  "retail_change_pct": -3.4,
+  "farm_price_cents_per_lb": [
+   50.2,
+   54.3
+  ],
+  "farm_price_change_pct": 8.2,
+  "gap_points": -11.6,
+  "retail_up_farm_down": false,
+  "source": "USDA ERS Price Spreads from Farm to Consumer (nominal dollars)",
+  "ams_shipping_point_change_pct": -8.5
+ },
+ "current_shelf_price": {
+  "series": "APU0000712311",
+  "label": "Tomatoes, field grown, per lb",
+  "latest_month": "2026-10",
+  "dollars_per_lb": 2.08,
+  "source": "BLS Average Price Data, U.S. city average",
+  "url": "https://www.bls.gov/cpi/factsheets/average-prices.htm",
+  "average_2025_dollars_per_lb": 1.84,
+  "months_in_2025_average": 11
+ },
+ "status": "ok",
+ "flags": [],
+ "notes": [
+  "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute)."
+ ]
+}

@@ -1,0 +1,90 @@
+{
+ "item": "lettuce-iceberg",
+ "name": "iceberg lettuce",
+ "everyday": true,
+ "generated": "2026-11-16",
+ "unit": "per pound",
+ "data_year": "2025",
+ "retail_price": {
+  "dollars": 1.8,
+  "cents_per_lb": 180.1,
+  "year": "2025",
+  "source": "USDA ERS Price Spreads from Farm to Consumer (retail data: Circana)",
+  "url": "https://www.ers.usda.gov/media/5754/fresh-lettuce-iceberg.csv",
+  "pulled": "2026-11-16"
+ },
+ "ers": {
+  "retail_cents_per_lb": 180.08,
+  "farm_price_cents_per_lb": 43.74,
+  "farm_share_pct": 26.12,
+  "farm_value_cents_per_retail_lb": 47.03,
+  "waste_factor_farm_lb_per_retail_lb": 1.075
+ },
+ "farm_price_check": {
+  "ers_farm_price_cents_per_lb": 43.7,
+  "ams_shipping_point_cents_per_lb": 41.4,
+  "ratio": 0.95,
+  "basis": "packed",
+  "meaning": "ERS farm price matches the packed shipping-point price: the farm layer includes packing (grower-shipper)."
+ },
+ "wholesale": {
+  "terminal_cents_per_lb": 60.5,
+  "cents_per_retail_lb": 65.1,
+  "pack": "iceberg, cartons of 24 heads (50 lb)",
+  "carton_weight_source": "USDA Agricultural Handbook 697, Weights, Measures, and Conversion Factors for Agricultural Commodities and Their Products (1992), Table 6: lettuce carton, 50 lb",
+  "market_days": 1817,
+  "markets": "Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia",
+  "months": "2025-01 to 2025-12"
+ },
+ "layers_cents": {
+  "farmworker": 8.71,
+  "farm_owner_and_costs": 17.41,
+  "shipping_and_wholesale": 10.03,
+  "store": 63.86
+ },
+ "layers_cents_display": {
+  "farmworker": 9,
+  "farm_owner_and_costs": 17,
+  "shipping_and_wholesale": 10,
+  "store": 64
+ },
+ "layer_sources": {
+  "farmworker": "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute). Applied to the ERS farm value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5754/fresh-lettuce-iceberg.csv)",
+  "farm_owner_and_costs": "ERS farm value minus the farmworker estimate. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5754/fresh-lettuce-iceberg.csv)",
+  "shipping_and_wholesale": "AMS terminal-market price (iceberg, cartons of 24 heads (50 lb); Atlanta; Boston; Chicago; Detroit; Los Angeles; Miami; New York; Philadelphia) adjusted by the ERS waste factor, minus ERS farm value. USDA AMS Market News (via market-tracker), https://github.com/codywtripp-lgtm/market-tracker",
+  "store": "ERS retail price minus the wholesale value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5754/fresh-lettuce-iceberg.csv)"
+ },
+ "trend_2yr": {
+  "from_year": "2023",
+  "to_year": "2025",
+  "retail_cents_per_lb": [
+   134.1,
+   180.1
+  ],
+  "retail_change_pct": 34.3,
+  "farm_price_cents_per_lb": [
+   34.8,
+   43.7
+  ],
+  "farm_price_change_pct": 25.6,
+  "gap_points": 8.7,
+  "retail_up_farm_down": false,
+  "source": "USDA ERS Price Spreads from Farm to Consumer (nominal dollars)",
+  "ams_shipping_point_change_pct": 13.3
+ },
+ "current_shelf_price": {
+  "series": "APU0000712211",
+  "label": "Lettuce, iceberg, per lb",
+  "latest_month": "2026-10",
+  "dollars_per_lb": 1.96,
+  "source": "BLS Average Price Data, U.S. city average",
+  "url": "https://www.bls.gov/cpi/factsheets/average-prices.htm",
+  "average_2025_dollars_per_lb": 1.59,
+  "months_in_2025_average": 10
+ },
+ "status": "ok",
+ "flags": [],
+ "notes": [
+  "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute)."
+ ]
+}

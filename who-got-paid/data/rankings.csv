@@ -1,0 +1,26 @@
+ranking,rank,item,name,value,unit,data_year,note
+a_smallest_farmworker_share,1,potatoes,potatoes,4.8,cents per $1,2024,
+a_smallest_farmworker_share,2,oranges,oranges,5.9,cents per $1,2024/25,
+a_smallest_farmworker_share,3,lettuce-romaine,romaine lettuce,6.3,cents per $1,2025,no wholesale split
+a_smallest_farmworker_share,4,apples,apples,6.3,cents per $1,2025,
+a_smallest_farmworker_share,5,grapefruit,grapefruit,8.2,cents per $1,2024/25,no wholesale split
+a_smallest_farmworker_share,6,lettuce-iceberg,iceberg lettuce,8.7,cents per $1,2025,
+a_smallest_farmworker_share,7,tomatoes,tomatoes,9.3,cents per $1,2025,
+a_smallest_farmworker_share,8,broccoli,broccoli,10.1,cents per $1,2025,
+a_smallest_farmworker_share,9,peaches,peaches,14.6,cents per $1,2025,no wholesale split
+a_smallest_farmworker_share,10,grapes,grapes,14.9,cents per $1,2025,
+b_retail_up_farm_down_gap,1,grapes,grapes,20.5,retail % change minus farm price % change,2023-2025,"retail +1.7%, farm -18.8%; retail up while farm down"
+b_retail_up_farm_down_gap,2,broccoli,broccoli,7.2,retail % change minus farm price % change,2023-2025,"retail +1.6%, farm -5.6%; retail up while farm down"
+b_retail_up_farm_down_gap,3,potatoes,potatoes,36.9,retail % change minus farm price % change,2022-2024,"retail -0.1%, farm -37.0%"
+b_retail_up_farm_down_gap,4,lettuce-romaine,romaine lettuce,9.2,retail % change minus farm price % change,2023-2025,"retail +33.4%, farm +24.2%"
+b_retail_up_farm_down_gap,5,lettuce-iceberg,iceberg lettuce,8.7,retail % change minus farm price % change,2023-2025,"retail +34.3%, farm +25.6%"
+b_retail_up_farm_down_gap,6,oranges,oranges,1.4,retail % change minus farm price % change,2022/23-2024/25,"retail -0.9%, farm -2.3%"
+b_retail_up_farm_down_gap,7,grapefruit,grapefruit,-3.3,retail % change minus farm price % change,2022/23-2024/25,"retail -0.4%, farm +2.9%"
+b_retail_up_farm_down_gap,8,apples,apples,-5.0,retail % change minus farm price % change,2023-2025,"retail -4.0%, farm +1.0%"
+b_retail_up_farm_down_gap,9,tomatoes,tomatoes,-11.6,retail % change minus farm price % change,2023-2025,"retail -3.4%, farm +8.2%"
+b_retail_up_farm_down_gap,10,peaches,peaches,-19.3,retail % change minus farm price % change,2023-2025,"retail -6.7%, farm +12.6%"
+c_everyday_item,1,potatoes,potatoes,4.8,farmworker cents per $1,2024,full breakdown
+c_everyday_item,2,apples,apples,6.3,farmworker cents per $1,2025,full breakdown
+c_everyday_item,3,lettuce-iceberg,iceberg lettuce,8.7,farmworker cents per $1,2025,full breakdown
+c_everyday_item,4,tomatoes,tomatoes,9.3,farmworker cents per $1,2025,full breakdown
+c_everyday_item,5,lettuce-romaine,romaine lettuce,6.3,farmworker cents per $1,2025,farm layer only

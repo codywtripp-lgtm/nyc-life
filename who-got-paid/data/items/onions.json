@@ -1,0 +1,13 @@
+{
+ "item": "onions",
+ "name": "onions",
+ "everyday": true,
+ "generated": "2026-11-16",
+ "status": "excluded",
+ "flags": [
+  "no farm value source"
+ ],
+ "notes": [
+  "ERS publishes no current farm value for onions and BLS publishes no average retail price, so there is no sourced retail price to split."
+ ]
+}

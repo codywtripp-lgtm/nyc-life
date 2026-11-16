@@ -1,0 +1,21 @@
+{
+ "item": "bananas",
+ "name": "bananas",
+ "everyday": true,
+ "generated": "2026-11-16",
+ "status": "excluded",
+ "flags": [
+  "no farm value source"
+ ],
+ "notes": [
+  "ERS publishes no farm value for bananas (imported), and AMS has no shipping-point price for them, so the farm and farmworker layers can't be sourced."
+ ],
+ "current_shelf_price": {
+  "series": "APU0000711211",
+  "label": "Bananas, per lb",
+  "latest_month": "2026-10",
+  "dollars_per_lb": 0.66,
+  "source": "BLS Average Price Data, U.S. city average",
+  "url": "https://www.bls.gov/cpi/factsheets/average-prices.htm"
+ }
+}

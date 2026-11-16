@@ -1,0 +1,63 @@
+{
+ "item": "peaches",
+ "name": "peaches",
+ "everyday": false,
+ "generated": "2026-11-16",
+ "unit": "per pound",
+ "data_year": "2025",
+ "retail_price": {
+  "dollars": 2.28,
+  "cents_per_lb": 227.6,
+  "year": "2025",
+  "source": "USDA ERS Price Spreads from Farm to Consumer (retail data: Circana)",
+  "url": "https://www.ers.usda.gov/media/5744/fresh-peaches.csv",
+  "pulled": "2026-11-16"
+ },
+ "ers": {
+  "retail_cents_per_lb": 227.59,
+  "farm_price_cents_per_lb": 94.85,
+  "farm_share_pct": 43.87,
+  "farm_value_cents_per_retail_lb": 99.84,
+  "waste_factor_farm_lb_per_retail_lb": 1.053
+ },
+ "layers_cents": {
+  "farmworker": 14.62,
+  "farm_owner_and_costs": 29.24,
+  "after_the_farm": 56.13
+ },
+ "layers_cents_display": {
+  "farmworker": 15,
+  "farm_owner_and_costs": 29,
+  "after_the_farm": 56
+ },
+ "layer_sources": {
+  "farmworker": "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute). Applied to the ERS farm value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5744/fresh-peaches.csv)",
+  "farm_owner_and_costs": "ERS farm value minus the farmworker estimate. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5744/fresh-peaches.csv)",
+  "after_the_farm": "ERS retail price minus ERS farm value. USDA ERS Price Spreads from Farm to Consumer, 2025 (https://www.ers.usda.gov/media/5744/fresh-peaches.csv)"
+ },
+ "trend_2yr": {
+  "from_year": "2023",
+  "to_year": "2025",
+  "retail_cents_per_lb": [
+   244.0,
+   227.6
+  ],
+  "retail_change_pct": -6.7,
+  "farm_price_cents_per_lb": [
+   84.2,
+   94.8
+  ],
+  "farm_price_change_pct": 12.6,
+  "gap_points": -19.3,
+  "retail_up_farm_down": false,
+  "source": "USDA ERS Price Spreads from Farm to Consumer (nominal dollars)"
+ },
+ "status": "ok",
+ "flags": [
+  "no wholesale split"
+ ],
+ "notes": [
+  "Peaches are not in the AMS data collected by market-tracker.",
+  "Estimate: farm labor is about one-third of farm revenue for fresh fruits and vegetables (Philip Martin, UC Davis, as cited by the Economic Policy Institute)."
+ ]
+}
